@@ -19,18 +19,33 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
       'movies',
-      serializers.serialize(object.movies, specifiedType: const FullType(BuiltList, const [const FullType(Movie)])),
+      serializers.serialize(object.movies,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(Movie)])),
       'isLoading',
-      serializers.serialize(object.isLoading, specifiedType: const FullType(bool)),
+      serializers.serialize(object.isLoading,
+          specifiedType: const FullType(bool)),
       'pageIndex',
-      serializers.serialize(object.pageIndex, specifiedType: const FullType(int)),
+      serializers.serialize(object.pageIndex,
+          specifiedType: const FullType(int)),
       'pageSize',
-      serializers.serialize(object.pageSize, specifiedType: const FullType(int)),
+      serializers.serialize(object.pageSize,
+          specifiedType: const FullType(int)),
     ];
     Object? value;
+    value = object.selectedMovie;
+    if (value != null) {
+      result
+        ..add('selectedMovie')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(Movie)));
+    }
     value = object.error;
     if (value != null) {
-      result..add('error')..add(serializers.serialize(value, specifiedType: const FullType(String)));
+      result
+        ..add('error')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
     }
     return result;
   }
@@ -48,19 +63,29 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       switch (key) {
         case 'movies':
           result.movies.replace(serializers.deserialize(value,
-              specifiedType: const FullType(BuiltList, const [const FullType(Movie)]))! as BuiltList<Object?>);
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(Movie)]))!
+              as BuiltList<Object?>);
           break;
         case 'isLoading':
-          result.isLoading = serializers.deserialize(value, specifiedType: const FullType(bool)) as bool;
+          result.isLoading = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'selectedMovie':
+          result.selectedMovie.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Movie))! as Movie);
           break;
         case 'pageIndex':
-          result.pageIndex = serializers.deserialize(value, specifiedType: const FullType(int)) as int;
+          result.pageIndex = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
           break;
         case 'pageSize':
-          result.pageSize = serializers.deserialize(value, specifiedType: const FullType(int)) as int;
+          result.pageSize = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
           break;
         case 'error':
-          result.error = serializers.deserialize(value, specifiedType: const FullType(String)) as String?;
+          result.error = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
       }
     }
@@ -75,16 +100,24 @@ class _$AppState extends AppState {
   @override
   final bool isLoading;
   @override
+  final Movie? selectedMovie;
+  @override
   final int pageIndex;
   @override
   final int pageSize;
   @override
   final String? error;
 
-  factory _$AppState([void Function(AppStateBuilder)? updates]) => (new AppStateBuilder()..update(updates)).build();
+  factory _$AppState([void Function(AppStateBuilder)? updates]) =>
+      (new AppStateBuilder()..update(updates)).build();
 
   _$AppState._(
-      {required this.movies, required this.isLoading, required this.pageIndex, required this.pageSize, this.error})
+      {required this.movies,
+      required this.isLoading,
+      this.selectedMovie,
+      required this.pageIndex,
+      required this.pageSize,
+      this.error})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(movies, 'AppState', 'movies');
     BuiltValueNullFieldError.checkNotNull(isLoading, 'AppState', 'isLoading');
@@ -93,7 +126,8 @@ class _$AppState extends AppState {
   }
 
   @override
-  AppState rebuild(void Function(AppStateBuilder) updates) => (toBuilder()..update(updates)).build();
+  AppState rebuild(void Function(AppStateBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
 
   @override
   AppStateBuilder toBuilder() => new AppStateBuilder()..replace(this);
@@ -104,6 +138,7 @@ class _$AppState extends AppState {
     return other is AppState &&
         movies == other.movies &&
         isLoading == other.isLoading &&
+        selectedMovie == other.selectedMovie &&
         pageIndex == other.pageIndex &&
         pageSize == other.pageSize &&
         error == other.error;
@@ -111,7 +146,13 @@ class _$AppState extends AppState {
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc($jc($jc(0, movies.hashCode), isLoading.hashCode), pageIndex.hashCode), pageSize.hashCode),
+    return $jf($jc(
+        $jc(
+            $jc(
+                $jc($jc($jc(0, movies.hashCode), isLoading.hashCode),
+                    selectedMovie.hashCode),
+                pageIndex.hashCode),
+            pageSize.hashCode),
         error.hashCode));
   }
 
@@ -120,6 +161,7 @@ class _$AppState extends AppState {
     return (newBuiltValueToStringHelper('AppState')
           ..add('movies', movies)
           ..add('isLoading', isLoading)
+          ..add('selectedMovie', selectedMovie)
           ..add('pageIndex', pageIndex)
           ..add('pageSize', pageSize)
           ..add('error', error))
@@ -137,6 +179,12 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   bool? _isLoading;
   bool? get isLoading => _$this._isLoading;
   set isLoading(bool? isLoading) => _$this._isLoading = isLoading;
+
+  MovieBuilder? _selectedMovie;
+  MovieBuilder get selectedMovie =>
+      _$this._selectedMovie ??= new MovieBuilder();
+  set selectedMovie(MovieBuilder? selectedMovie) =>
+      _$this._selectedMovie = selectedMovie;
 
   int? _pageIndex;
   int? get pageIndex => _$this._pageIndex;
@@ -157,6 +205,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
     if ($v != null) {
       _movies = $v.movies.toBuilder();
       _isLoading = $v.isLoading;
+      _selectedMovie = $v.selectedMovie?.toBuilder();
       _pageIndex = $v.pageIndex;
       _pageSize = $v.pageSize;
       _error = $v.error;
@@ -183,17 +232,25 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _$result = _$v ??
           new _$AppState._(
               movies: movies.build(),
-              isLoading: BuiltValueNullFieldError.checkNotNull(isLoading, 'AppState', 'isLoading'),
-              pageIndex: BuiltValueNullFieldError.checkNotNull(pageIndex, 'AppState', 'pageIndex'),
-              pageSize: BuiltValueNullFieldError.checkNotNull(pageSize, 'AppState', 'pageSize'),
+              isLoading: BuiltValueNullFieldError.checkNotNull(
+                  isLoading, 'AppState', 'isLoading'),
+              selectedMovie: _selectedMovie?.build(),
+              pageIndex: BuiltValueNullFieldError.checkNotNull(
+                  pageIndex, 'AppState', 'pageIndex'),
+              pageSize: BuiltValueNullFieldError.checkNotNull(
+                  pageSize, 'AppState', 'pageSize'),
               error: error);
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'movies';
         movies.build();
+
+        _$failedField = 'selectedMovie';
+        _selectedMovie?.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError('AppState', _$failedField, e.toString());
+        throw new BuiltValueNestedFieldError(
+            'AppState', _$failedField, e.toString());
       }
       rethrow;
     }

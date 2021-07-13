@@ -10,6 +10,8 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
   factory AppState() {
     return _$AppState((AppStateBuilder b) {
       b
+        ..movies = null
+        ..selectedMovie = null
         ..isLoading = false
         ..pageIndex = 1
         ..pageSize = 20;
@@ -21,6 +23,8 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
   BuiltList<Movie> get movies;
 
   bool get isLoading;
+
+  Movie? get selectedMovie;
 
   int get pageIndex;
 
