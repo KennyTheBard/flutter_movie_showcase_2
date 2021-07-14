@@ -1,8 +1,4 @@
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
-import 'package:flutter_movie_showcase_2/models/serializers.dart';
-
-part 'movie.g.dart';
+part of models;
 
 abstract class Movie implements Built<Movie, MovieBuilder> {
   factory Movie([void Function(MovieBuilder)? updates]) = _$Movie;

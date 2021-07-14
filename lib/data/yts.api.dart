@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_movie_showcase_2/models/movie.dart';
+import 'package:flutter_movie_showcase_2/models/index.dart';
 import 'package:http/http.dart';
 
 class YtsApi {

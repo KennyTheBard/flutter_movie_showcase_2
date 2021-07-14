@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movie_showcase_2/models/app_state.dart';
-import 'package:flutter_movie_showcase_2/models/movie.dart';
+import 'package:flutter_movie_showcase_2/models/index.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 

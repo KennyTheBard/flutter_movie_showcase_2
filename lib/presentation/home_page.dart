@@ -1,12 +1,8 @@
-import 'package:flutter_movie_showcase_2/actions/get_movies.dart';
-import 'package:flutter_movie_showcase_2/actions/select_movie.dart';
-import 'package:flutter_movie_showcase_2/containers/is_loading_container.dart';
+import 'package:flutter_movie_showcase_2/actions/index.dart';
 import 'package:flutter_movie_showcase_2/containers/movie_details_container.dart';
-import 'package:flutter_movie_showcase_2/containers/movie_list_container.dart';
-import 'package:flutter_movie_showcase_2/models/app_state.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_movie_showcase_2/models/movie.dart';
+import 'package:flutter_movie_showcase_2/models/index.dart';
 import 'package:flutter_movie_showcase_2/presentation/movie_details.dart';
 import 'package:flutter_movie_showcase_2/presentation/movie_list.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -21,7 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   void _loadMovies() {
     StoreProvider.of<AppState>(context).dispatch(const GetMovies());
   }
@@ -39,12 +34,11 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _loadMovies();
-        },
-        backgroundColor: Colors.black,
-        child: const Icon(Icons.download)
-      ),
+          onPressed: () {
+            _loadMovies();
+          },
+          backgroundColor: Colors.black,
+          child: const Icon(Icons.download)),
     );
   }
 }

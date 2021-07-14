@@ -1,32 +1,11 @@
-import 'package:flutter_movie_showcase_2/models/movie.dart';
+part of actions;
 
-class GetMovies {
-  const GetMovies();
+@freezed
+class GetMovies with _$GetMovies implements AppAction {
+  const factory GetMovies() = GetMoviesStart;
 
-  @override
-  String toString() {
-    return 'GetMovies{}';
-  }
-}
+  const factory GetMovies.successful(List<Movie> movies) = GetMoviesSuccessful;
 
-class GetMoviesSuccessful {
-  const GetMoviesSuccessful(this.movies);
-
-  final List<Movie> movies;
-
-  @override
-  String toString() {
-    return 'GetMoviesSuccessful{movies: $movies}';
-  }
-}
-
-class GetMoviesError {
-  const GetMoviesError(this.error);
-
-  final Object error;
-
-  @override
-  String toString() {
-    return 'GetMoviesError{error: $error}';
-  }
+  @Implements(ErrorAction)
+  const factory GetMovies.error(Object error, StackTrace stackTrace) = GetMoviesError;
 }

@@ -1,6 +1,8 @@
+library serializers;
+
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
-import 'package:flutter_movie_showcase_2/models/movie.dart';
+import 'package:flutter_movie_showcase_2/models/index.dart';
 
 part 'serializers.g.dart';
 
