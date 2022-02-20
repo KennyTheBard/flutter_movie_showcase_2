@@ -17,7 +17,7 @@ class AppEpic {
 
   Stream<Object> _getMovies(Stream<GetMoviesStart> actions, EpicStore<AppState> store) {
     return actions
-        .asyncMap((GetMoviesStart event) => _ytsApi.getMovies(store.state.pageIndex, store.state.pageIndex))
+        .asyncMap((GetMoviesStart event) => _ytsApi.getMovies(store.state.pageIndex, store.state.pageSize))
         .map<Object>((List<Movie> movies) => GetMovies.successful(movies))
         .onErrorReturnWith((Object error, StackTrace st) => GetMovies.error(error, st));
   }
